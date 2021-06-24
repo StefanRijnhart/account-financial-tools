@@ -9,9 +9,13 @@ def pre_init_hook(cr):
     Population of the columns is triggered in the post_init_hook
     """
     cr.execute(
-        """alter table account_move_line
+        """
+        alter table account_account
+        add column if not exists root_group_id INTEGER,
+        add column if not exists sub_group_id INTEGER;
+        alter table account_move_line
         add column if not exists account_root_group_id INTEGER,
-        add column if not exists account_sub_group_id INTEGER
+        add column if not exists account_sub_group_id INTEGER;
         """)
 
 
